@@ -1,8 +1,6 @@
 # Chat2PDF
  A PDF saver for ChatGPT.
  
-![chat2pdf](https://user-images.githubusercontent.com/106478752/222900474-2316fd8b-c06e-456c-b3a5-39464e1fdb87.png)
- 
  ## Description
  This is a Chrome Extension that allows users to convert conversations with ChatGPT into PDF files with specific formatting for paragraphs, lists (ordered or
  unordered), tables, and code snippets etc. 
