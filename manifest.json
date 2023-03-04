@@ -1,0 +1,39 @@
+{
+    "name": "Chat2PDF",
+    "version": "1.0",
+    "description": "Saving conversations with ChatGPT",
+    "icons": {
+      "128": "assets/icon.png"
+    },
+    "host_permissions": ["https://chat.openai.com/chat/*"],
+    "permissions": ["tabs", "activeTab", "downloads"],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://chat.openai.com/chat/*"],
+            "js": ["pdfmake.min.js", "vfs_fonts.js", "conversation.js"]
+        }
+    ],
+    "web_accessible_resources": [
+      {
+        "resources": [
+          "assets/icon.png",
+          "assets/iconBck.png",
+          "assets/logo.png"
+        ],
+        "matches": ["https://chat.openai.com/*"]
+      }
+    ],
+    "action": {
+        "default_title": "Chat2PDF",
+        "default_icon": {
+            "16": "assets/ext-icon.png",
+            "24": "assets/ext-icon.png",
+            "32": "assets/ext-icon.png"
+        },
+        "default_popup": "popup.html"
+    },
+    "manifest_version": 3
+}
