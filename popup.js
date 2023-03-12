@@ -1,3 +1,4 @@
+// Rendering elements onto the popup window depending on the current web page
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
   const currentTab = tabs[0];
 
@@ -60,6 +61,7 @@ generatePDFbutton.addEventListener("click", () => {
   });
 
 });
+
 
 downloadPDFbutton.addEventListener("click", function () {
 

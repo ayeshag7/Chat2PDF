@@ -7,7 +7,7 @@
         // Creating a new array
         const questionDivs = [];
     
-        // Looping through the divs and retrieving only those that contain text nodes
+        // Looping through the divs and retrieving only those divs that contain text nodes
         for (let i = 0; i < divs.length-3; i++) {
             const childNodes = divs[i].childNodes;
             let hasText = false;
@@ -33,14 +33,14 @@
     
     function extractAnswers () {
         
-        // Selecting all the divs.
+        // Selecting all the divs
         const allDivs = document.querySelectorAll("div");
     
-        // Creating a new array.
+        // Creating a new array
         const answerDivs = [];
     
         // Populating the newly created array with those divs whose first child is a paragraph 
-        // element but which may or may not contain other elements as well.
+        // element but which may or may not contain other elements as well
         for (let i = 0; i < allDivs.length; i++) {
             if (allDivs[i].firstElementChild && allDivs[i].firstElementChild.tagName === "P") {
                 answerDivs.push(allDivs[i]);
@@ -48,7 +48,7 @@
         };
     
     
-        // Formatting the answers and pushing them into the 'answers' array.
+        // Formatting the answers and pushing them into the 'answers' array
         const answers = [];
     
         for (let j=0; j<answerDivs.length; j++) {
@@ -89,7 +89,8 @@
     };
     
     function generatePDF(questions, answers, conversationTitle) {
-    
+
+        // Defining the document and its styles components
         var docDefinition = {
             content: [],
     
@@ -255,6 +256,7 @@
     let interval;
     let pdf;
 
+    // Extracting the conversation data
     chrome.runtime.onMessage.addListener((message, sender, response) => {
         if (message.action === "extractData") {
 
@@ -278,31 +280,26 @@
         }
     })
     
+    // Generating the PDF document
     chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         if (message.action === "generatePDF") {
-
             if (answers && questions && answers.length === questions.length && answers.length > 0) {
-
                 pdf = generatePDF(questions, answers, title);
 
                 sendResponse({ reply: "pdfGenerated" });
-
               } else {
-
                 sendResponse({ reply: "error", message: "Data was not extracted yet!" });
-
               }
-
         }
       });
 
+      // Downloading the PDF documeny
       chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         if (message.action === "downloadPDF") {
 
             pdf.download(`${title}.pdf`)
 
         }
-
       });
 
 }) ();
