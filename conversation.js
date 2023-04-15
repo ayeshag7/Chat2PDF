@@ -272,6 +272,9 @@
                     questions = extractQuestions();
                     questions = questions.slice(0, answers.length)
 
+                    console.log(questions)
+                    console.log(answers)
+
                 }
 
             }, 500)            
@@ -287,7 +290,7 @@
                 pdf = generatePDF(questions, answers, title);
 
                 sendResponse({ reply: "pdfGenerated" });
-              } else {
+              } else { 
                 sendResponse({ reply: "error", message: "Data was not extracted yet!" });
               }
         }
