@@ -1,7 +1,7 @@
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (
       tab.url &&
-      tab.url.includes("https://chat.openai.com/chat/") &&
+      tab.url.includes("https://chat.openai.com/c/") &&
       changeInfo.status === "complete"
     ) {
       chrome.tabs.sendMessage(tabId, {

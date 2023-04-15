@@ -2,7 +2,7 @@
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
   const currentTab = tabs[0];
 
-  if (currentTab.url.includes("https://chat.openai.com/chat/")) {
+  if (currentTab.url.includes("https://chat.openai.com/c/")) {
 
     document.getElementById("generate-pdf-button").classList.remove("display-hidden");
     document.getElementById("generate-pdf-button").classList.add("display-button");
