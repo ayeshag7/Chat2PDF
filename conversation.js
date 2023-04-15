@@ -272,9 +272,6 @@
                     questions = extractQuestions();
                     questions = questions.slice(0, answers.length)
 
-                    console.log(questions)
-                    console.log(answers)
-
                 }
 
             }, 500)            
