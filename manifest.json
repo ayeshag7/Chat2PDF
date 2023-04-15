@@ -5,14 +5,14 @@
     "icons": {
       "128": "assets/icon.png"
     },
-    "host_permissions": ["https://chat.openai.com/chat/*"],
+    "host_permissions": ["https://chat.openai.com/c/*"],
     "permissions": ["tabs", "activeTab", "downloads"],
     "background": {
         "service_worker": "background.js"
     },
     "content_scripts": [
         {
-            "matches": ["https://chat.openai.com/chat/*"],
+            "matches": ["https://chat.openai.com/c/*"],
             "js": ["pdfmake.min.js", "vfs_fonts.js", "conversation.js"]
         }
     ],
