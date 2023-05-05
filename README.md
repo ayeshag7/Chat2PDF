@@ -35,3 +35,7 @@ Learn more about it [here](http://pdfmake.org/#/).
 
 ## Note
 This extension started off as a personal project and I consider this as only the first iteration. 
+
+# Announcement
+Due to recent changes in the DOM structure of the conversation webpage of chatgpt, some functionality of the extension is not working as expected.
+This problem is in the process of being fixed!
