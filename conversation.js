@@ -20,8 +20,9 @@
                 }
             }
         
-            // If the div contains a text node, pushing it into the 'questionDivs' array
-            if (hasText) {
+            // If the div contains a text node which is indeed a question, 
+            // pushing it into the 'questionDivs' array
+            if (hasText && divs[i].classList.contains("empty:hidden")) {
                 questionDivs.push(divs[i].innerText)
             }
     
@@ -97,14 +98,14 @@
             styles: {
                 header: {
                     bold: true,
-                    fontSize: 22,
+                    fontSize: 24,
                     decoration: "underline",
                     margin: [0, 0, 0, 32],
                     alignment: "center"
                 },
                 question: {
                     bold: true,
-                    fontSize: 16,
+                    fontSize: 18,
                     lineHeight: 1.2,
                     margin: [0, 14, 0, 7]
                     },
@@ -143,7 +144,7 @@
     
     
             // Pushing the question onto the document
-            docDefinition.content.push({ text: questions[i], style: 'question' });
+            docDefinition.content.push({ text: "Q: " + questions[i], style: 'question' });
     
             // Pushing the answer onto the document
             const answerElements = answers[i].split("\\split-string-here\\");
@@ -274,16 +275,17 @@
 
                 }
 
-            }, 500)            
+            }, 500)
 
-            response({ message: "Data extracted successfully!" });
         }
     })
     
     // Generating the PDF document
     chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         if (message.action === "generatePDF") {
+
             if (answers && questions && answers.length === questions.length && answers.length > 0) {
+
                 pdf = generatePDF(questions, answers, title);
 
                 sendResponse({ reply: "pdfGenerated" });

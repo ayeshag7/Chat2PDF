@@ -12,8 +12,8 @@
     },
     "content_scripts": [
         {
-            "matches": ["https://chat.openai.com/c/*"],
-            "js": ["pdfmake.min.js", "vfs_fonts.js", "conversation.js"]
+            "matches": ["https://chat.openai.com/*"],
+            "js": ["conversation.js", "pdfmake.min.js", "vfs_fonts.js"]
         }
     ],
     "web_accessible_resources": [
