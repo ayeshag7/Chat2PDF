@@ -34,4 +34,7 @@ Learn more about it [here](http://pdfmake.org/#/).
  * Select the extracted folder of the extension.
 
 ## Note
-This extension started off as a personal project and I consider this as only the first iteration. 
+This extension started off as a personal project and I consider this as only the first iteration. More functionality and improvements will be added soon.
+
+## To be added soon
+* Syntax highlighitng for code snippets
