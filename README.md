@@ -1,5 +1,5 @@
 # Chat2PDF
- A PDF saver Chrome extension for ChatGPT.
+ A PDF saver Chrome extension.
  
  <img src="https://user-images.githubusercontent.com/106478752/224372263-44d61ad4-b9c1-4f04-82a7-7ae7c9b35c47.png" alt="Image description" width="220" />
  
