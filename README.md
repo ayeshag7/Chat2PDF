@@ -6,7 +6,7 @@
  ## Description
  This is a Chrome Extension that allows users to convert conversations with ChatGPT into PDF files with specific formatting for paragraphs, lists (ordered or
  unordered), tables, and code snippets etc. 
- <p>The extension also has the functionality to save the generated PDF files.<p/>
+ <p>The extension also has the functionality to save the generated PDF files.</p>
  
   ## Technologies Used
 * HTML
@@ -34,4 +34,4 @@ Learn more about it [here](http://pdfmake.org/#/).
  * Select the extracted folder of the extension.
 
 ## Note
-This extension started off as a personal project and I consider this as only the first iteration. 
+This extension started off as a personal project and I consider this as only the first iteration. Moreover, ongoing maintenance is necessary and will be a top priority to respond aptly to the changes in the website's layout.
