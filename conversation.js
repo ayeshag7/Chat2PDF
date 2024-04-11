@@ -1,37 +1,34 @@
 (() => {
 
-    function extractQuestions () {
-        // Getting all the divs on the page
-        const divs = document.querySelectorAll("div");
-    
-        // Creating a new array
-        const questionDivs = [];
-    
-        // Looping through the divs and retrieving only those divs that contain text nodes
-        for (let i = 0; i < divs.length-3; i++) {
-            const childNodes = divs[i].childNodes;
-            let hasText = false;
+    // Function to extract questions, answers, or texts from the div elements with the class 'text-message'
+    function extractTexts() {
+        var textMessageDivs = document.querySelectorAll('div.text-message');
+        var texts = [];
+        textMessageDivs.forEach(function(div) {
+            texts.push(div.textContent.trim());
+        });
+
+        // Ensuring that the overall length of the array is even
+        if (texts.length % 2 !== 0) {
+            texts.push('');
+        }
         
-            // Checking if any of the child nodes are text nodes
-            for (let j = 0; j < childNodes.length; j++) {
-                if (childNodes[j].nodeType === Node.TEXT_NODE) {
-                hasText = true;
-                break;
-                }
-            }
-        
-            // If the div contains a text node which is indeed a question, 
-            // pushing it into the 'questionDivs' array
-            if (hasText && divs[i].classList.contains("empty:hidden")) {
-                questionDivs.push(divs[i].innerText)
-            }
-    
-        };
-    
-        return questionDivs;
-    
+        return texts;
     }
-    
+
+    // Function to extract questions from the texts array
+    function extractQuestions() {
+        var texts = extractTexts();
+        var questions = [];
+        texts.forEach(function(text, index) {
+            if (index % 2 === 0) {
+                questions.push(text);
+            }
+        });
+        return questions;
+    }
+
+    // Function to extract answers from the texts array
     function extractAnswers () {
         
         // Selecting all the divs
@@ -47,7 +44,6 @@
                 answerDivs.push(allDivs[i]);
             }
         };
-    
     
         // Formatting the answers and pushing them into the 'answers' array
         const answers = [];
@@ -88,13 +84,12 @@
     
         return answers;
     };
-    
+
     function generatePDF(questions, answers, conversationTitle) {
 
         // Defining the document and its styles components
         var docDefinition = {
             content: [],
-    
             styles: {
                 header: {
                     bold: true,
@@ -105,20 +100,20 @@
                 },
                 question: {
                     bold: true,
-                    fontSize: 18,
+                    fontSize: 16,
                     lineHeight: 1.2,
                     margin: [0, 14, 0, 7]
                     },
                 paragraph: {
-                    fontSize: 14,
+                    fontSize: 12,
                     margin: [0, 7, 0, 7]
                 },
                 list: {
-                    fontSize: 14,
+                    fontSize: 12,
                     margin: [0, 5, 0, 5]
                 },
                 code: {
-                    fontSize: 14,
+                    fontSize: 12,
                     italics: true,
                     preformatted: true,
                     margin: [7, 7, 7, 7],
@@ -130,15 +125,7 @@
     
         // Adding the document header
         docDefinition.content.push({text: conversationTitle, style: 'header'})
-    
-        // Ensuring that the 'questions' and 'answers' arrays are of the same length
-        if (questions.length !== answers.length) {
-            if (questions.length > answers.length) {
-                questions.pop()
-            } else {
-                answers.pop()
-            }
-        }
+
     
         for (let i=0; i<questions.length; i++) {
     
@@ -245,7 +232,6 @@
             }
         }
     
-        // Generating the PDF document
         const pdfDoc = pdfMake.createPdf(docDefinition);
 
         return pdfDoc;
@@ -264,19 +250,15 @@
             interval = setInterval(() => {
 
                 answers = extractAnswers();
+                questions = extractQuestions();
 
-                if (answers.length !== 0) {
+                if (answers.length !== 0 && questions.length !== 0 && answers.length === questions.length) {
                     clearInterval(interval)
 
                     title = document.title;
-                    
-                    questions = extractQuestions();
-                    questions = questions.slice(0, answers.length)
-
                 }
-
+                
             }, 500)
-
         }
     })
     
@@ -295,7 +277,7 @@
         }
       });
 
-      // Downloading the PDF documeny
+      // Downloading the PDF document
       chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         if (message.action === "downloadPDF") {
 
